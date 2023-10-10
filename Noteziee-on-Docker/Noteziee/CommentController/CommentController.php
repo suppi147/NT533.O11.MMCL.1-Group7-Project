@@ -8,9 +8,9 @@ class CommentController{
     }
 
     function Connect2DB(){
-        $hostname="localhost";
+        $hostname="DatabaseBuilder";
         $dbname="CommentDB";
-        $username="root";
+        $username="noteziee";
         $password="uitcisco";
         try{
             $this->connect=new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password) or die("Can't connect to Database");

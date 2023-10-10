@@ -1,6 +1,6 @@
 <?php
-    include __DIR__.'CommentController/CommentController.php';
-    include __DIR__.'CommentController/PostComment.php';
+    include '/var/www/html/Noteziee/CommentController/CommentController.php';
+    include '/var/www/html/Noteziee/CommentController/PostComment.php';
 
 $controller= new CommentController();
 

@@ -54,15 +54,20 @@ class ShowComment extends CommentController{
             </div>
         </div>
     </div>';
+        
+        $fetcherData = $fetcherPack->Fetch();
 
-            $reverseComentPie= new ArrayIterator(array_reverse($fetcherPack->Fetch()));
-
-            
-            foreach($reverseComentPie as $fetcher)
-            {
-                  $commentPieHtmlpack[]=$htmlStarter.$fetcher.$htmlEnder;
+        if (is_array($fetcherData)) {
+            $reverseComentPie = new ArrayIterator(array_reverse($fetcherData));
+        
+            foreach ($reverseComentPie as $fetcher) {
+                $commentPieHtmlpack[] = $htmlStarter . $fetcher . $htmlEnder;
             }
+            
             return $commentPieHtmlpack;
+        } else {
+            return [];
+        }
       }
 }
 ?>
