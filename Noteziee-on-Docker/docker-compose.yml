@@ -1,0 +1,20 @@
+version: "3"
+services:
+  DatabaseBuilder:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=CommentDB
+      - MYSQL_USER=noteziee
+      - MYSQL_PASSWORD=uitcisco
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    volumes:
+      - "./DatabaseBuilder:/docker-entrypoint-initdb.d"
+  noteziee:
+    image: php:apache
+    ports: 
+      - 80:80
+    volumes: 
+      - "./Noteziee:/var/www/html/Noteziee"
+    build:
+      context: ./Noteziee
+      dockerfile: Dockerfile 
