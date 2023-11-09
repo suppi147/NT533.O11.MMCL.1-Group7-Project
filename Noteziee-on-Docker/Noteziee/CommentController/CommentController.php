@@ -8,7 +8,7 @@ class CommentController{
     }
 
     function Connect2DB(){
-        $hostname="DatabaseBuilder";
+        $hostname="noteziee-db-service";
         $dbname="CommentDB";
         $username="noteziee";
         $password="uitcisco";
