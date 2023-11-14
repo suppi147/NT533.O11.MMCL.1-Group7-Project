@@ -29,8 +29,8 @@
               <div class="row">
                    <div class="col-lg-3 col-md-12 logo">
                     
-                       <a href="http://localhost/route1/Noteziee/Homepage/"><img class="white" src="http://localhost/Noteziee/Homepage/assets/images/logo.png" alt=""></a>
-                       <a href="http://localhost/route1/Noteziee/Homepage/"><img class="gray" src="http://localhost/Noteziee/Homepage/assets/images/logo-gray.png" alt=""></a>
+                       <a href="http://localhost/route1/Noteziee/Homepage/"><img class="white" src="http://localhost/route1/Noteziee/Homepage/assets/images/logo.png" alt=""></a>
+                       <a href="http://localhost/route1/Noteziee/Homepage/"><img class="gray" src="http://localhost/route1/Noteziee/Homepage/assets/images/logo-gray.png" alt=""></a>
 
                        <a class="small-menu" class="d-lg-none" data-toggle="collapse" data-target="#menu" href="#menu" >
                            <i  class="fas d-lg-none fa-bars"></i>
