@@ -11,17 +11,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /v1(/|$)(.*)
+      - path: /route1(/|$)(.*)
         pathType: Prefix
         backend:
           service:
             name: noteziee-service
-            port:
-              number: 80
-      - path: /hello-world-two(/|$)(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: aks-helloworld-two
             port:
               number: 80
