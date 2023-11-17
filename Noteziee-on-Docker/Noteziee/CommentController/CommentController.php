@@ -13,7 +13,7 @@ class CommentController{
         $username="noteziee";
         $password="uitcisco";
         
-        $maxAttempt = 10;
+        $maxAttempt = 100;
         $attempt = 1;
         while($attempt <= $maxAttempt){
             try{
@@ -21,7 +21,6 @@ class CommentController{
                 break;
             }
             catch(PDOException $e){
-                echo"Connection failed: ".$e->getMessage();
                 $attempt++;
             }
         }    
