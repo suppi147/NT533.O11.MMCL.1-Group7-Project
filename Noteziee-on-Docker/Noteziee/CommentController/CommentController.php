@@ -1,7 +1,7 @@
 <?php
 class CommentController{
     protected $connect;
-    public $indexLocation="http://localhost/route1/Noteziee/CommentUI/index/index.php";
+    public $indexLocation="http://localhost/Noteziee/CommentUI/index/index.php";
 
     function __construct(){
         $connect=null;
@@ -12,16 +12,24 @@ class CommentController{
         $dbname="CommentDB";
         $username="noteziee";
         $password="uitcisco";
-        try{
-            $this->connect=new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password) or die("Can't connect to Database");
-        }
-        catch(PDOException $e){
-            echo"Connection failed: ".$e->getMessage();
+        
+        $maxAttempt = 10;
+        $attempt = 1;
+        while($attempt <= $maxAttempt){
+            try{
+                $this->connect=new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password) or die("Can't connect to Database");
+                break;
+            }
+            catch(PDOException $e){
+                echo"Connection failed: ".$e->getMessage();
+                $attempt++;
+            }
         }    
     }
     function Disconnect2DB(){
 	$this->connect=null;
     }
+    
 
 
 }

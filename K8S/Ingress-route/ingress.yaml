@@ -11,7 +11,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /route1(/|$)(.*)
+      - path: /Noteziee
         pathType: Prefix
         backend:
           service:
