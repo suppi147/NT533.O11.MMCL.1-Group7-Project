@@ -1,6 +1,28 @@
 version: "3"
 services:
+  noteziee:
+    container_name: Noteziee_daemon
+    links:
+      - DatabaseBuilder:DatabaseBuilder
+    restart: always
+    ports: 
+      - 80:80
+    volumes: 
+      - "./Noteziee:/var/www/html/Noteziee"
+    environment:
+     - DB_HOST=DatabaseBuilder
+    depends_on:
+     - DatabaseBuilder
+    build:
+      context: .
+      dockerfile: ./Container/Dockerfile 
+    networks:
+      vpcbr:
+        ipv4_address: 10.37.13.69
+
   DatabaseBuilder:
+    container_name: DatabaseBuilder
+    restart: always
     image: mysql:latest
     environment:
       - MYSQL_DATABASE=CommentDB
@@ -9,12 +31,11 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=1
     volumes:
       - "./DatabaseBuilder:/docker-entrypoint-initdb.d"
-  noteziee:
-    image: php:apache
-    ports: 
-      - 80:80
-    volumes: 
-      - "./Noteziee:/var/www/html/Noteziee"
-    build:
-      context: ./Noteziee
-      dockerfile: Dockerfile 
+    networks:
+      vpcbr:
+        ipv4_address: 10.37.13.68
+
+networks:
+  vpcbr:
+    external: true
+    name: Noteziee-network
