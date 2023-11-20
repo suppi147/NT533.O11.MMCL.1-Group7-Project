@@ -10,7 +10,7 @@ spec:
       targetPort: 3306
   selector:
     app: noteziee
-  type: NodePort
+  type: ClusterIP
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
