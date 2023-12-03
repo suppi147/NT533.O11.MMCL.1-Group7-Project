@@ -24,10 +24,11 @@ services:
     container_name: DatabaseBuilder
     restart: always
     image: mysql:latest
+    env_file: .env
     environment:
       - MYSQL_DATABASE=CommentDB
-      - MYSQL_USER=noteziee
-      - MYSQL_PASSWORD=uitcisco
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ALLOW_EMPTY_PASSWORD=1
     volumes:
       - "./DatabaseBuilder:/docker-entrypoint-initdb.d"
