@@ -19,7 +19,6 @@ metadata:
 data:
   MYSQL_ALLOW_EMPTY_PASSWORD: "1"
   MYSQL_DATABASE: CommentDB
-  MYSQL_PASSWORD: uitcisco
   MYSQL_USER: noteziee
 ---
 apiVersion: storage.k8s.io/v1
@@ -88,7 +87,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 3Gi      
+      storage: 3Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -107,22 +106,28 @@ spec:
         app: noteziee
     spec:
       containers:
-        - envFrom:
-          - configMapRef:
-              name: noteziee-db-config
-          image: mysql:latest
-          name: noteziee
-          ports:
-            - containerPort: 3306
-          volumeMounts:
-            - name: sql-trigger-persistent-storage
-              mountPath: "/docker-entrypoint-initdb.d"
-            - name: noteziee-db-persistent-storage
-              mountPath: "/var/lib/mysql"
-      volumes:
+      - name: noteziee
+        image: mysql:latest
+        env:
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+        envFrom:
+        - configMapRef:
+             name: noteziee-db-config
+        ports:
+        - containerPort: 3306
+        volumeMounts:
         - name: sql-trigger-persistent-storage
-          persistentVolumeClaim:
-            claimName: sql-trigger-pv-claim
+          mountPath: "/docker-entrypoint-initdb.d"
         - name: noteziee-db-persistent-storage
-          persistentVolumeClaim:
-            claimName: noteziee-db-pv-claim
+          mountPath: "/var/lib/mysql"
+      volumes:
+      - name: sql-trigger-persistent-storage
+        persistentVolumeClaim:
+          claimName: sql-trigger-pv-claim
+      - name: noteziee-db-persistent-storage
+        persistentVolumeClaim:
+          claimName: noteziee-db-pv-claim
