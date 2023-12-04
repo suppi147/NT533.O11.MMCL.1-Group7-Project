@@ -1,30 +1,27 @@
-# NT533.O11.MMCL.1-Project
-### Author
-    Group 7:
+# Báo cáo đồ án thực hành NT533.O11.MMCL.1
+### Thành viên
+    Nhóm 7:
         Trần Lê Khôi - 20521484
         Nguyễn Đức Toàn - 20522026
         Lương Mạnh Tiến - 20522008
-### About the project
-- In this project, we will build and deploy a noting website-Noteziee on Docker.
-### Technology used
-- Frontend: html, css and js.
+### Giới thiệu về đồ án
+- Trong đồ án này, nhóm chúng em đã thực hiện trên nền tảng K8S với hai web services chính và các services có thể kết nối đến database, ngoài ra nhóm chúng em còn cài thêm một số các service quan trọng như kong ingress controller, kubenetes dashboard và persistent volume.
+### Các công nghệ đã sử dụng
+- Frontend: html, css và js.
 - Backend: php.
 - Database: mysql.
-- Deploy environment: docker.
-### Deployment
-- Download source code.
-```
-git clone https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project.git
-```
-- Build and run containers.
-```
-cd Noteziee-on-Docker
-chmod +x deploy.sh
-./deploy.sh
-```
-### Result
-- Containers running.
-![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/75429369/7b187f7f-1495-4758-a336-143a36e9ea8e)
-- Noteziee is now on.
-![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/442aa0f7-f71e-4951-beac-5fbe1e12e797)
-
+- Deploy platform: K8S.
+### Kết quả demo
+- Về hoạt động của các web services thì sẽ được phân luồng theo path bởi kong ingress controller và lưu dữ liệu trong persistent volume.
+  - Truy cập vào web service bar.
+    ![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/15b091b0-5110-48be-b891-ffd7b82f411f)
+  - Truy cập vào web service Noteziee và lưu dữ liệu trong database.
+    ![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/88cfd3d4-9570-4f32-a743-5f17ff0b003f)
+  - Lưu dữ liệu trong persistent storage.
+    ![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/0a76c95b-a6b0-4ed5-9af2-c6ef77ecf579)
+- Triển khai các services lưu các biến như là configmap và secret.
+    ![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/857835f7-6216-48c4-a76c-9a62be0240d3)
+- Triển khai kubernetes dashboard.
+    ![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/b0e4e6e7-00af-47a9-b2c8-5dfd3788b74e)
+### Kết thúc
+    
