@@ -5,7 +5,7 @@
         Nguyễn Đức Toàn - 20522026
         Lương Mạnh Tiến - 20522008
 ### Giới thiệu về đồ án
-- Trong đồ án này, nhóm chúng em đã thực hiện trên nền tảng K8S với hai web services chính và các services có thể kết nối đến database, ngoài ra nhóm chúng em còn cài thêm một số các service quan trọng như kong ingress controller, kubenetes dashboard và persistent volume.
+- Trong đồ án này, nhóm chúng em đã thực hiện trên nền tảng K8S với hai web services chính và các services có thể kết nối đến database, ngoài ra nhóm chúng em còn cài thêm một số các service quan trọng như kong ingress controller, kubenetes dashboard, configmap, secret và persistent volume.
 ### Các công nghệ đã sử dụng
 - Frontend: html, css và js.
 - Backend: php.
@@ -19,6 +19,8 @@
     ![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/88cfd3d4-9570-4f32-a743-5f17ff0b003f)
   - Lưu dữ liệu trong persistent storage.
     ![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/0a76c95b-a6b0-4ed5-9af2-c6ef77ecf579)
+  - Service kong ingress controller.
+    ![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/7218f3ce-1bac-42ed-b3b9-5a8c8d299e0b)
 - Triển khai các services lưu các biến như là configmap và secret.
     ![image](https://github.com/suppi147/NT533.O11.MMCL.1-Group7-Project/assets/97881547/857835f7-6216-48c4-a76c-9a62be0240d3)
 - Triển khai kubernetes dashboard.
