@@ -146,7 +146,6 @@ echo '</div>
                        <li>Smart Hi</li>
                        <li>Smart School</li>
 
-
                    </ul>
                   </div>
 
@@ -206,3 +205,4 @@ echo '</div>
             <script src="/Noteziee/Homepage/assets/js/script.js"></script>
                 </html>';
 ?>
+

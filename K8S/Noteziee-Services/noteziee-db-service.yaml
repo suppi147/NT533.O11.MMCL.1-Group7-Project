@@ -1,0 +1,133 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: noteziee-db-service
+  labels:
+    app: noteziee
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+    app: noteziee
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: noteziee-db-config
+data:
+  MYSQL_ALLOW_EMPTY_PASSWORD: "1"
+  MYSQL_DATABASE: CommentDB
+  MYSQL_USER: noteziee
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: sql-trigger-sc
+provisioner: k8s.io/hostpath
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sql-trigger-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: sql-trigger-sc
+  capacity:
+    storage: 50Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/sql-trigger"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sql-trigger-pv-claim
+spec:
+  storageClassName: sql-trigger-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Mi
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: noteziee-db-sc
+provisioner: k8s.io/hostpath
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: noteziee-db-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: noteziee-db-sc
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/noteziee-db"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: noteziee-db-pv-claim
+spec:
+  storageClassName: noteziee-db-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: noteziee-db-deployment
+  labels:
+    app: noteziee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: noteziee
+  template:
+    metadata:
+      labels:
+        app: noteziee
+    spec:
+      containers:
+      - name: noteziee
+        image: mysql:latest
+        env:
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+        envFrom:
+        - configMapRef:
+             name: noteziee-db-config
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: sql-trigger-persistent-storage
+          mountPath: "/docker-entrypoint-initdb.d"
+        - name: noteziee-db-persistent-storage
+          mountPath: "/var/lib/mysql"
+      volumes:
+      - name: sql-trigger-persistent-storage
+        persistentVolumeClaim:
+          claimName: sql-trigger-pv-claim
+      - name: noteziee-db-persistent-storage
+        persistentVolumeClaim:
+          claimName: noteziee-db-pv-claim

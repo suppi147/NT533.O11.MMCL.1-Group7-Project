@@ -8,20 +8,27 @@ class CommentController{
     }
 
     function Connect2DB(){
-        $hostname="DatabaseBuilder";
+        $hostname="noteziee-db-service";
         $dbname="CommentDB";
         $username="noteziee";
         $password="uitcisco";
-        try{
-            $this->connect=new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password) or die("Can't connect to Database");
-        }
-        catch(PDOException $e){
-            echo"Connection failed: ".$e->getMessage();
+        
+        $maxAttempt = 100;
+        $attempt = 1;
+        while($attempt <= $maxAttempt){
+            try{
+                $this->connect=new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password) or die("Can't connect to Database");
+                break;
+            }
+            catch(PDOException $e){
+                $attempt++;
+            }
         }    
     }
     function Disconnect2DB(){
 	$this->connect=null;
     }
+    
 
 
 }
