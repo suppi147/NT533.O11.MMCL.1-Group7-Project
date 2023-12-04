@@ -5,7 +5,7 @@
         Nguyễn Đức Toàn - 20522026
         Lương Mạnh Tiến - 20522008
 ### Giáo viên hướng dẫn
-    Thầy Lê Anh Tuấn.
+    Thầy Lê Anh Tuấn
 ### Giới thiệu về đồ án
 - Trong đồ án này, nhóm chúng em đã thực hiện trên nền tảng K8S với hai web services chính và các services có thể kết nối đến database, ngoài ra nhóm chúng em còn cài thêm một số các service quan trọng như kong ingress controller, kubenetes dashboard, configmap, secret và persistent volume.
 ### Các công nghệ đã sử dụng
